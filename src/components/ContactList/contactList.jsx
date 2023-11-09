@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 
 export const ContactList = () => {
   const contacts = useSelector(selectContacts);
-  console.log(contacts);
   const filter = useSelector(selectFilter);
 
   const filterContacts = () => {
@@ -22,21 +21,3 @@ export const ContactList = () => {
     </ContactListStyled>
   );
 };
-
-/*======== REDUX =======*/
-// export const ContactList = () => {
-//   const contacts = useSelector(state => state.contacts.contacts);
-//   const filter = useSelector(state => state.filter.filter);
-
-//   const filterContacts = contacts.filter(contact =>
-//     contact.name.toLowerCase().includes(filter.toLowerCase())
-//   );
-
-//   return (
-//     <ContactListStyled>
-//       {filterContacts.map(({ id, name, number }) => (
-//         <Contact key={id} name={name} phone={number} />
-//       ))}
-//     </ContactListStyled>
-//   );
-// };
