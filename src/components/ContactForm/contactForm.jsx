@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/contactSlice';
+import { selectContacts } from 'redux/selectors';
+import { addContacts } from 'redux/operations';
 import { Button, LabelStyled } from './contactForm.styled';
 import { HiPhoneOutgoing } from 'react-icons/hi';
 import { Formik, Form, Field } from 'formik';
@@ -21,7 +21,7 @@ const PhoneBookSchema = Yup.object().shape({
 });
 
 export const ContactForm = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   return (
@@ -38,7 +38,7 @@ export const ContactForm = () => {
             contact => contact.name.toLowerCase() === values.name.toLowerCase()
           )
         ) {
-          dispatch(addContact(values));
+          dispatch(addContacts(values));
         } else {
           console.log(`${values.name} is already in contacts`);
         }

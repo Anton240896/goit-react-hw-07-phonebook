@@ -1,4 +1,9 @@
 import React from 'react';
+import { useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchContacts } from 'redux/operations';
+import { selectIsLoading, selectError } from 'redux/selectors';
 
 import { ContactForm } from 'components/ContactForm/contactForm';
 import { ContactList } from 'components/ContactList/contactList';
@@ -15,6 +20,15 @@ import { VscNotebook } from 'react-icons/vsc';
 
 /*======== REDUX =======*/
 export const App = () => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  /*======== RENDER =======*/
   return (
     <Main>
       <section>
@@ -27,6 +41,8 @@ export const App = () => {
             <Contacts>Contacts</Contacts>
             <Filter />
           </ContactFilter>
+
+          {isLoading && !error && <b>Request in progress...</b>}
 
           <ContactList />
         </Container>
